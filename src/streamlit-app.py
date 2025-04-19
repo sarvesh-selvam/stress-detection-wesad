@@ -18,16 +18,16 @@ selected_model = st.sidebar.selectbox("Select Model", model_options)
 
 # File paths per model
 summary_paths = {
-    "Random Forest": "loso_summary_rf.json",
-    "XGBoost": "loso_summary_xgb.json"
+    "Random Forest": "results/loso_summary_rf.json",
+    "XGBoost": "results/loso_summary_xgb.json"
 }
 report_paths = {
-    "Random Forest": "per_subject_reports_rf.json",
-    "XGBoost": "per_subject_reports_xgb.json"
+    "Random Forest": "results/per_subject_reports_rf.json",
+    "XGBoost": "results/per_subject_reports_xgb.json"
 }
 shap_model_paths = {
-    "Random Forest": "model_rf.pkl",
-    "XGBoost": "model_xgb.pkl"
+    "Random Forest": "results/model_rf.pkl",
+    "XGBoost": "results/model_xgb.pkl"
 }
 
 # Load summary data
