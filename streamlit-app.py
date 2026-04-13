@@ -72,6 +72,7 @@ try:
     ax.tick_params(axis='both', labelsize=8)
     col, _ = st.columns([1, 2])
     col.pyplot(fig)
+    plt.close(fig)
 except KeyError:
     st.warning("Confusion matrix not available for this subject.")
 
