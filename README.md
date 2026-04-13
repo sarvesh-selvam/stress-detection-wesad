@@ -4,6 +4,25 @@ Physiological stress detection using the [WESAD dataset](https://archive.ics.uci
 
 ---
 
+## Project Structure
+
+```
+stress-detection-wesad/
+├── data/
+│   ├── raw/              # Original WESAD .pkl files (not included)
+│   ├── processed/        # Segmented signals as .npy files
+│   └── features/         # Extracted feature CSVs per subject
+├── notebooks/
+│   ├── 01_exploratory_analysis.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   └── 03_modeling.ipynb
+├── results/              # Saved models, LOSO summaries, per-subject reports
+├── streamlit-app.py
+└── requirements.txt
+```
+
+---
+
 ## Dataset
 
 **WESAD** (Wearable Stress and Affect Detection) contains multimodal physiological recordings from 15 subjects (S2–S17, excluding S12) wearing a RespiBAN chest device and an Empatica E4 wrist device.
@@ -86,22 +105,3 @@ pip install -r requirements.txt
 3. `notebooks/03_modeling.ipynb` — training and evaluation
 
 **Note:** Raw WESAD data must be downloaded separately and placed under `data/raw/S{id}/S{id}.pkl`. The dataset is available from the [UCI ML Repository](https://archive.ics.uci.edu/dataset/465/wesad+wearable+stress+and+affect+detection).
-
----
-
-## Project Structure
-
-```
-stress-detection-wesad/
-├── data/
-│   ├── raw/              # Original WESAD .pkl files (not included)
-│   ├── processed/        # Segmented signals as .npy files
-│   └── features/         # Extracted feature CSVs per subject
-├── notebooks/
-│   ├── 01_exploratory_analysis.ipynb
-│   ├── 02_feature_engineering.ipynb
-│   └── 03_modeling.ipynb
-├── results/              # Saved models, LOSO summaries, per-subject reports
-├── streamlit-app.py
-└── requirements.txt
-```
