@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import json
 import matplotlib.pyplot as plt
-from sklearn.metrics import ConfusionMatrixDisplay
+from glob import glob
 import seaborn as sns
 import shap
 import joblib
@@ -63,19 +63,38 @@ try:
     fig, ax = plt.subplots()
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
                 xticklabels=["Baseline", "Stress", "Amusement"],
-                yticklabels=["Baseline", "Stress", "Amusement"])
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
+                yticklabels=["Baseline", "Stress", "Amusement"],
+                ax=ax)
+    ax.set_xlabel("Predicted")
+    ax.set_ylabel("Actual")
     st.pyplot(fig)
 except KeyError:
     st.warning("Confusion matrix not available for this subject.")
 
-# SHAP summary (optional)
-if st.checkbox("Show SHAP Explainability (last model only)"):
+# SHAP summary
+if st.checkbox("Show SHAP Explainability (last trained fold)"):
     st.subheader("SHAP Feature Importance")
-    model = joblib.load(shap_model_paths[selected_model])
-    explainer = shap.Explainer(model)
-    shap_values = explainer.shap_values(model.get_booster().get_dump())
-    st.write("Feature importance based on last trained model:")
-    shap.summary_plot(shap_values, features=model.feature_names_in_, show=False)
-    st.pyplot(bbox_inches='tight')
+
+    @st.cache_resource
+    def load_shap(model_path):
+        return joblib.load(model_path)
+
+    @st.cache_data
+    def load_features():
+        files = sorted(glob("data/features/S*_features.csv"))
+        df = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
+        df = df[df['label'].isin([1, 2, 3])]
+        return df.drop(columns=['label'])
+
+    model = load_shap(shap_model_paths[selected_model])
+    X_all = load_features()
+    X_sample = X_all.sample(min(200, len(X_all)), random_state=42)
+
+    with st.spinner("Computing SHAP values..."):
+        explainer = shap.Explainer(model)
+        shap_values = explainer(X_sample)
+
+    st.caption("Based on last trained fold model — 200 randomly sampled segments.")
+    shap.summary_plot(shap_values, features=X_sample, show=False)
+    st.pyplot(plt.gcf(), bbox_inches='tight')
+    plt.clf()
