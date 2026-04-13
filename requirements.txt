@@ -2,6 +2,7 @@ streamlit
 matplotlib
 pandas
 numpy
+scipy
 seaborn
 shap
 xgboost
