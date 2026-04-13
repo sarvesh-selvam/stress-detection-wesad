@@ -1,5 +1,6 @@
-# Data (too large for GitHub)
-data/
+# Raw and processed data (too large for GitHub)
+data/raw/
+data/processed/
 
 # Trained model binaries (regenerate by running notebooks)
 results/*.pkl
