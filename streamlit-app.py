@@ -100,5 +100,8 @@ if st.checkbox("Show SHAP Explainability (last trained fold)"):
 
     st.caption("Based on last trained fold model — 200 randomly sampled segments.")
     shap.summary_plot(shap_values, features=X_sample, show=False)
-    st.pyplot(plt.gcf(), bbox_inches='tight')
+    fig = plt.gcf()
+    fig.set_size_inches(5, 4)
+    col, _ = st.columns([2, 3])
+    col.pyplot(fig, bbox_inches='tight')
     plt.clf()
