@@ -61,14 +61,15 @@ st.dataframe(report_df, use_container_width=True)
 st.subheader(f"Confusion Matrix – {selected_subj}")
 try:
     cm = np.array(reports[selected_subj]['confusion_matrix'])
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(4, 3))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
                 xticklabels=["Baseline", "Stress", "Amusement"],
                 yticklabels=["Baseline", "Stress", "Amusement"],
                 ax=ax)
     ax.set_xlabel("Predicted")
     ax.set_ylabel("Actual")
-    st.pyplot(fig)
+    col, _ = st.columns([1, 2])
+    col.pyplot(fig)
 except KeyError:
     st.warning("Confusion matrix not available for this subject.")
 
