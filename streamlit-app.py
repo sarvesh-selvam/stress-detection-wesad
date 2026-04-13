@@ -52,7 +52,8 @@ col2.metric("Average F1 Score", f"{summary['mean_f1']:.2%}")
 
 # Per-subject classification report
 st.subheader(f"Classification Report – {selected_subj} ({selected_model})")
-report_df = pd.DataFrame(reports[selected_subj]).T.iloc[:-3]  # drop avg rows
+report_data = {k: v for k, v in reports[selected_subj].items() if k != 'confusion_matrix'}
+report_df = pd.DataFrame(report_data).T.iloc[:-3]  # drop avg rows
 report_df = report_df.round(3)
 st.dataframe(report_df, use_container_width=True)
 
