@@ -55,7 +55,7 @@ st.subheader(f"Classification Report – {selected_subj} ({selected_model})")
 report_data = {k: v for k, v in reports[selected_subj].items() if k != 'confusion_matrix'}
 report_df = pd.DataFrame(report_data).T.iloc[:-3]  # drop avg rows
 report_df = report_df.drop(columns=['support'], errors='ignore').round(3)
-col, _ = st.columns([1, 2])
+col, _ = st.columns([2, 3])
 col.dataframe(report_df)
 
 # Confusion Matrix
