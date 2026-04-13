@@ -66,8 +66,8 @@ try:
                 xticklabels=["Baseline", "Stress", "Amusement"],
                 yticklabels=["Baseline", "Stress", "Amusement"],
                 ax=ax)
-    ax.set_xlabel("Predicted", fontsize=11, fontweight="bold")
-    ax.set_ylabel("Actual", fontsize=11, fontweight="bold")
+    ax.set_xlabel("Predicted", fontsize=11)
+    ax.set_ylabel("Actual", fontsize=11)
     ax.tick_params(axis='both', labelsize=8)
     col, _ = st.columns([1, 2])
     col.pyplot(fig)
