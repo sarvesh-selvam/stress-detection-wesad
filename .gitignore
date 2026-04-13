@@ -1,4 +1,24 @@
-# Data Folder (too large for GitHub)
-data
+# Data (too large for GitHub)
+data/
 
+# Trained model binaries (regenerate by running notebooks)
+results/*.pkl
+
+# macOS
 .DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables
+.env
